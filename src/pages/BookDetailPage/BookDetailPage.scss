@@ -1,0 +1,458 @@
+.book-detail {
+  max-width: 393px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  &__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(86, 86, 86, 0.83);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__header {
+    height: 75px;
+    border-bottom: 1px solid #000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 0 16px 8px;
+    flex-shrink: 0;
+  }
+
+  &__header-actions {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-family: 'Pretendard', sans-serif;
+    color: #000;
+  }
+
+  &__action-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    font-family: 'Pretendard', sans-serif;
+    cursor: pointer;
+    color: #000;
+    padding: 0;
+  }
+
+  &__action-sep {
+    font-size: 24px;
+    color: #000;
+  }
+
+  &__top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 20px 0;
+  }
+
+  &__title {
+    font-size: 26px;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 400;
+    color: #000;
+    margin: 0 0 12px;
+    text-align: center;
+  }
+
+  &__cover {
+    width: 180px;
+    height: 238px;
+    background: #D9D9D9;
+    border: 1px solid #565656;
+    flex-shrink: 0;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__author {
+    font-size: 20px;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 400;
+    color: #000;
+    margin: 12px 0 0;
+  }
+
+  &__status-badge {
+    font-size: 20px;
+    font-family: 'Pretendard', sans-serif;
+    background: #D9D9D9;
+    padding: 2px 16px;
+    margin-top: 8px;
+    color: #000;
+  }
+
+  &__period {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #999;
+  }
+
+  &__period-label {
+    font-size: 16px;
+    font-family: 'Pretendard', sans-serif;
+    color: #000;
+    white-space: nowrap;
+  }
+
+  &__period-dates {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    background: #D9D9D9;
+    padding: 4px 8px;
+    font-size: 14px;
+    font-family: 'Pretendard', sans-serif;
+    color: #000;
+    gap: 8px;
+  }
+
+  &__tab-bar {
+    position: relative;
+    display: flex;
+    border-bottom: 1px solid #999;
+    margin: 0 20px;
+    flex-shrink: 0;
+  }
+
+  &__tab {
+    flex: 1;
+    height: 44px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 400;
+    color: #000;
+    cursor: pointer;
+    position: relative;
+
+    &--active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #4C0105;
+    }
+  }
+
+  &__content {
+    flex: 1;
+    padding: 16px 20px;
+    overflow-y: auto;
+  }
+}
+
+/* 삭제 모달 */
+.delete-modal {
+  background: #fff;
+  border-radius: 15px;
+  width: 324px;
+  overflow: hidden;
+
+  &__title {
+    font-size: 22px;
+    font-family: 'Pretendard', sans-serif;
+    color: #000;
+    text-align: center;
+    padding: 24px 0 12px;
+    margin: 0;
+  }
+
+  &__desc {
+    font-size: 19px;
+    font-family: 'Pretendard', sans-serif;
+    color: #000;
+    text-align: center;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0 0 20px;
+  }
+
+  &__line {
+    height: 1px;
+    background: #000;
+  }
+
+  &__actions {
+    display: flex;
+    height: 52px;
+  }
+
+  &__btn {
+    flex: 1;
+    background: none;
+    border: none;
+    font-size: 19px;
+    font-family: 'Pretendard', sans-serif;
+    color: #000;
+    cursor: pointer;
+  }
+
+  &__vline {
+    width: 1px;
+    background: #000;
+    align-self: stretch;
+  }
+}
+
+/* 수정 바텀 시트 */
+.edit-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 393px;
+  background: #EAE7DC;
+  border-radius: 31px 31px 0 0;
+  border: 1px solid #000;
+  padding: 20px 24px 40px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    font-size: 28px;
+    font-family: 'BM JUA_TTF', 'Pretendard', sans-serif;
+    cursor: pointer;
+    color: #000;
+    position: absolute;
+    left: 0;
+    padding: 0;
+  }
+
+  &__title {
+    flex: 1;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Pretendard', sans-serif;
+    color: #000;
+  }
+
+  &__section {
+    margin-bottom: 20px;
+  }
+
+  &__label {
+    font-size: 20px;
+    font-family: 'Pretendard', sans-serif;
+    color: #000;
+    margin: 0 0 12px;
+  }
+
+  &__status-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__status-btn {
+    flex: 1;
+    height: 79px;
+    background: #999;
+    border: none;
+    font-size: 14px;
+    font-family: 'Pretendard', sans-serif;
+    color: #fff;
+    cursor: pointer;
+
+    &--active {
+      background: #565656;
+    }
+  }
+
+  &__dates {
+    display: flex;
+    gap: 16px;
+  }
+
+  &__date-group {
+    flex: 1;
+  }
+
+  &__date-label {
+    font-size: 16px;
+    font-family: 'Pretendard', sans-serif;
+    color: #000;
+    margin: 0 0 8px;
+  }
+
+  &__date-input {
+    width: 100%;
+    height: 36px;
+    background: #999;
+    border: none;
+    border-radius: 6px;
+    padding: 0 8px;
+    font-size: 13px;
+    font-family: 'Pretendard', sans-serif;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+
+    &::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+      cursor: pointer;
+    }
+  }
+
+  &__save {
+    display: block;
+    width: 309px;
+    height: 53px;
+    background: #565656;
+    border: none;
+    border-radius: 20px;
+    font-size: 24px;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    margin: 32px auto 0;
+  }
+}
+
+/* 책 정보 탭 */
+.book-info {
+  &__row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 20px;
+  }
+
+  &__key {
+    font-size: 14px;
+    font-family: 'Pretendard', sans-serif;
+    color: #000;
+    font-weight: 500;
+  }
+
+  &__val {
+    font-size: 14px;
+    font-family: 'Pretendard', sans-serif;
+    color: #555;
+    line-height: 1.5;
+  }
+}
+
+/* 메모 탭 */
+.book-memo {
+  &__toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+  }
+
+  &__write-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #FDEAC4;
+    border: none;
+    border-radius: 18px;
+    padding: 6px 14px;
+    font-size: 15px;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 700;
+    color: #000;
+    cursor: pointer;
+  }
+
+  &__empty {
+    text-align: center;
+    color: #999;
+    font-size: 16px;
+    font-family: 'Pretendard', sans-serif;
+    margin-top: 40px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+.memo-card {
+  background: #D9D9D9;
+  border-radius: 27px;
+  padding: 16px 20px;
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    border-bottom: 1px solid #999;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+
+  &__content {
+    font-size: 15px;
+    font-family: 'Pretendard', sans-serif;
+    color: #000;
+    flex: 1;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  &__delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  &__date {
+    font-size: 12px;
+    font-family: 'Pretendard', sans-serif;
+    color: #999;
+    margin: 0;
+  }
+}
+
+/* 가독이챗 탭 */
+.book-chat {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+
+  &__btn {
+    width: 210px;
+    height: 50px;
+    background: #D9D9D9;
+    border: none;
+    border-radius: 16px;
+    font-size: 20px;
+    font-family: 'Pretendard', sans-serif;
+    color: #000;
+    cursor: pointer;
+  }
+}
