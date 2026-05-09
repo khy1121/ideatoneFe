@@ -1,0 +1,42 @@
+/*
+ Design tokens / SCSS variables
+ - Central place for colors, spacing, breakpoints and other tokens.
+ - Import these into `global.scss` before other partials.
+*/
+$color-primary: #4f7cff;
+$color-primary-dark: #315de0;
+$color-secondary: #eef2ff;
+$color-background: #f7f8fa;
+$color-surface: #ffffff;
+$color-text: #222;
+$color-sub-text: #777;
+$color-border: #e5e5e5;
+$color-white: #ffffff;
+$color-danger: #d92d20;
+$color-danger-light: #fecdca;
+$color-danger-bg: #fff1f0;
+$color-success: #16803c;
+$color-warning: #f2c94c;
+$color-gold: #E4BC77;
+$color-input-bg: #D9D9D9;
+$color-label: #565656;
+
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+
+$radius-sm: 4px;
+$radius-md: 8px;
+
+$font-size-sm: 0.875rem;
+$font-size-md: 1rem;
+$font-size-lg: 1.125rem;
+$font-size-2xl: 1.75rem;
+
+$shadow-md: 0 12px 30px rgba(15, 23, 42, 0.14);
+$z-modal: 1000;
+$z-toast: 1100;
+
+$breakpoint-mobile: 768px;
