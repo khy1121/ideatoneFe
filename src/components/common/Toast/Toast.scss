@@ -1,0 +1,54 @@
+﻿@use '../../../styles/variables' as *;
+
+/*
+ * Toast 스타일
+ * 저장 성공, 요청 실패 같은 짧은 피드백을 화면 오른쪽 아래에 고정해서 보여줍니다.
+ */
+.toast {
+  position: fixed;
+  right: $spacing-lg;
+  bottom: $spacing-lg;
+  z-index: $z-toast;
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  max-width: min(360px, calc(100vw - 32px));
+  padding: $spacing-md $spacing-lg;
+  border-radius: $radius-md;
+  box-shadow: $shadow-md;
+  background: $color-text;
+  color: $color-white;
+}
+
+// 성공 알림입니다.
+.toast--success {
+  background: $color-success;
+}
+
+// 실패 알림입니다.
+.toast--error {
+  background: $color-danger;
+}
+
+// 주의가 필요한 알림입니다.
+.toast--warning {
+  background: $color-warning;
+  color: $color-text;
+}
+
+// 알림 본문입니다.
+.toast__message {
+  line-height: 1.5;
+}
+
+// 사용자가 알림을 직접 닫을 때 사용하는 버튼입니다.
+.toast__close {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}

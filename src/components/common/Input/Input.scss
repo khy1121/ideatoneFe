@@ -1,0 +1,11 @@
+﻿/*
+ Input styles
+ - Shared input appearance for form fields.
+*/
+@use '../../../styles/variables' as *;
+
+.fe-input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid $color-border;
+  border-radius: 6px;
+}

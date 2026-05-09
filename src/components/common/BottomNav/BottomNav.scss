@@ -1,0 +1,46 @@
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 393px;
+  height: 64px;
+  background: #fff;
+  border-top: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 100;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px;
+  }
+
+  &__label {
+    font-size: 11px;
+    font-family: 'Pretendard', sans-serif;
+    color: #000;
+    white-space: nowrap;
+  }
+
+  &__my {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Pretendard', sans-serif;
+    line-height: 1;
+  }
+}

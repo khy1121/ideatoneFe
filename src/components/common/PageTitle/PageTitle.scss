@@ -1,0 +1,39 @@
+﻿@use '../../../styles/variables' as *;
+
+/*
+ * PageTitle 스타일
+ * 페이지 상단의 제목, 설명, 우측 액션 영역을 같은 패턴으로 배치합니다.
+ */
+.page-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $spacing-lg;
+  margin-bottom: $spacing-xl;
+}
+
+// 페이지의 대표 제목입니다.
+.page-title__heading {
+  margin: 0;
+  font-size: $font-size-2xl;
+  color: $color-text;
+}
+
+// 제목 아래에 표시되는 보조 설명 문구입니다.
+.page-title__description {
+  margin: $spacing-sm 0 0;
+  color: $color-sub-text;
+  line-height: 1.6;
+}
+
+// 버튼, 필터, 링크 등 오른쪽에 붙는 액션 영역입니다.
+.page-title__right {
+  flex-shrink: 0;
+}
+
+// 모바일에서는 제목과 액션 영역을 세로로 쌓아 좁은 화면에서도 겹치지 않게 합니다.
+@media (max-width: $breakpoint-mobile) {
+  .page-title {
+    flex-direction: column;
+  }
+}

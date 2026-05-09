@@ -1,0 +1,8 @@
+﻿/* Loading styles */
+@use '../../../styles/variables' as *;
+
+.fe-loading { display:flex; align-items:center; gap:0.75rem; color:$color-sub-text }
+.fe-loading__spinner { width:18px; height:18px; border:3px solid $color-border; border-top-color:$color-primary; border-radius:50%; animation:spin 1s linear infinite }
+.fe-loading__text { font-size:0.95rem }
+
+@keyframes spin { to { transform: rotate(360deg) } }

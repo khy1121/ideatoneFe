@@ -1,0 +1,11 @@
+﻿/* Textarea styles - 공통 텍스트영역 스타일 */
+@use '../../../styles/variables' as *;
+
+.fe-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 0.75rem;
+  border: 1px solid $color-border;
+  border-radius: 8px;
+  resize: vertical;
+}
