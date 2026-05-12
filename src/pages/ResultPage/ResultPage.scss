@@ -1,8 +1,8 @@
 .result-loading,
 .result,
 .coin-page {
-  width: min(393px, 100vw);
-  min-height: 100vh;
+  width: 393px;
+  height: 852px;
   margin: 0 auto;
   background: #fefefe;
   font-family: 'Pretendard', sans-serif;
@@ -11,7 +11,7 @@
 
 .result-loading {
   position: relative;
-  width: min(393px, 100vw);
+  width: 393px;
   height: 852px;
   overflow: hidden;
 
@@ -82,8 +82,8 @@
 
 .result {
   position: relative;
-  min-height: 1171px;
-  overflow-x: hidden;
+  height: 852px;
+  overflow: hidden;
 
   &__header {
     position: absolute;

@@ -20,7 +20,7 @@
 // ── 채팅 목록 ──────────────────────────────────────────────
 .chat-list {
   position: relative;
-  width: min(393px, 100vw);
+  width: 393px;
   height: 852px;
   margin: 0 auto;
   overflow: hidden;
@@ -146,7 +146,7 @@
 // ── 채팅 방 (처음접속 / 입력중 / 로딩중) ────────────────────
 .chat-room {
   position: relative;
-  width: min(393px, 100vw);
+  width: 393px;
   height: 852px;
   margin: 0 auto;
   overflow: hidden;
