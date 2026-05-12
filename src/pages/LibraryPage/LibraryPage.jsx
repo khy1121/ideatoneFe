@@ -1,16 +1,61 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { mockBooks } from '../../data/mockBooks'
 import BottomNav from '../../components/common/BottomNav/BottomNav'
+import { ROUTES } from '../../constants/routes'
+import { SearchIcon } from '../../assets/icons'
 import './LibraryPage.scss'
+
+const SAVED_KEY = 'savedBookIds'
+const SAVED_VER_KEY = 'savedBookIds_ver'
+const SAVED_VER = 'v2'
+const ROW_HEIGHT = 165
+
+function getSavedIds() {
+  const ver = localStorage.getItem(SAVED_VER_KEY)
+  if (ver === SAVED_VER) {
+    const raw = localStorage.getItem(SAVED_KEY)
+    if (raw !== null) return new Set(JSON.parse(raw))
+  }
+  const all = mockBooks.map(b => b.id)
+  localStorage.setItem(SAVED_KEY, JSON.stringify(all))
+  localStorage.setItem(SAVED_VER_KEY, SAVED_VER)
+  return new Set(all)
+}
+
+function calcInitialRows() {
+  const contentHeight = window.innerHeight - 78 - 64 - 34
+  return Math.max(Math.ceil(contentHeight / ROW_HEIGHT) + 1, 3)
+}
 
 export default function LibraryPage() {
   const navigate = useNavigate()
+  const contentRef = useRef(null)
 
-  const rows = []
-  for (let i = 0; i < mockBooks.length; i += 3) {
-    rows.push(mockBooks.slice(i, i + 3))
-  }
+  const savedBooks = mockBooks.filter(b => getSavedIds().has(b.id))
+  const totalBookRows = Math.ceil(savedBooks.length / 3)
+
+  const [visibleRows, setVisibleRows] = useState(() =>
+    Math.min(calcInitialRows(), totalBookRows)
+  )
+
+  useEffect(() => {
+    const el = contentRef.current
+    if (!el) return
+
+    const handleScroll = () => {
+      if (el.scrollTop + el.clientHeight >= el.scrollHeight - 80) {
+        setVisibleRows(prev => Math.min(prev + 1, totalBookRows))
+      }
+    }
+
+    el.addEventListener('scroll', handleScroll, { passive: true })
+    return () => el.removeEventListener('scroll', handleScroll)
+  }, [totalBookRows])
+
+  const rows = Array.from({ length: Math.min(visibleRows, totalBookRows) }, (_, i) =>
+    savedBooks.slice(i * 3, i * 3 + 3)
+  )
 
   return (
     <div className="library">
@@ -18,34 +63,36 @@ export default function LibraryPage() {
         <div className="library__title-wrap">
           <span className="library__title">서재</span>
         </div>
-        <button className="library__search" aria-label="검색">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <path d="M10.5 2.33325C6.0035 2.33325 2.33334 6.00341 2.33334 10.4999C2.33334 14.9964 6.0035 18.6666 10.5 18.6666C12.5393 18.6666 14.4025 17.9059 15.8366 16.6614L16.3333 17.1581V18.6666L23.3333 25.6666L25.6667 23.3333L18.6667 16.3333H17.1582L16.6615 15.8365C17.906 14.4024 18.6667 12.5393 18.6667 10.4999C18.6667 6.00341 14.9965 2.33325 10.5 2.33325ZM10.5 4.66659C13.7355 4.66659 16.3333 7.26444 16.3333 10.4999C16.3333 13.7354 13.7355 16.3333 10.5 16.3333C7.26453 16.3333 4.66668 13.7354 4.66668 10.4999C4.66668 7.26444 7.26453 4.66659 10.5 4.66659Z" fill="#999"/>
-          </svg>
+        <button className="library__search" aria-label="검색" onClick={() => navigate(ROUTES.SEARCH)}>
+          <SearchIcon size={28} color="#999" />
         </button>
       </header>
 
-      <div className="library__content">
-        {rows.map((row, ri) => (
-          <div key={ri}>
-            <div className="library__row">
-              {row.map(book => (
-                <button
-                  key={book.id}
-                  className="library__book"
-                  onClick={() => navigate(`/book/${book.id}`)}
-                  aria-label={book.title}
-                >
-                  <img className="library__cover" src={book.cover} alt={book.title} />
-                </button>
-              ))}
+      <div className="library__content" ref={contentRef}>
+        {savedBooks.length === 0 ? (
+          <p className="library__empty">서재에 저장된 책이 없습니다.<br />검색으로 책을 추가해보세요.</p>
+        ) : (
+          rows.map((row, ri) => (
+            <div key={ri}>
+              <div className="library__row">
+                {row.map(book => (
+                  <button
+                    key={book.id}
+                    className="library__book"
+                    onClick={() => navigate(`/book/${book.id}`)}
+                    aria-label={book.title}
+                  >
+                    <img className="library__cover" src={book.cover} alt={book.title} />
+                  </button>
+                ))}
+              </div>
+              <div className="library__divider" />
             </div>
-            <div className="library__divider" />
-          </div>
-        ))}
+          ))
+        )}
       </div>
 
-      <BottomNav active="home" />
+      <BottomNav active="library" />
     </div>
   )
 }
