@@ -1,0 +1,35 @@
+.memo-toolbar {
+  display: flex;
+  width: 393px;
+  height: 68px;
+  background: #fff;
+  border-top: 1px solid #e6e6e4;
+
+  &__btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 8px 0;
+
+    &--active {
+      .memo-toolbar__label {
+        color: #f7bb0a;
+      }
+    }
+  }
+
+  &__label {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #161615;
+    line-height: 18px;
+    letter-spacing: -0.3px;
+  }
+}
