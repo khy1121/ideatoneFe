@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../constants/routes'
+import { ChevronLeftIcon } from '../../assets/icons'
 import './NicknamePage.scss'
 
 // 3~10자, 한글/영어 소문자/숫자, 특수문자 불가
@@ -17,9 +18,7 @@ export default function NicknamePage() {
     <div className="auth-page">
       <header className="auth-header">
         <button className="auth-header__back" onClick={() => navigate(-1)} aria-label="뒤로가기">
-          <svg width="12" height="20" viewBox="0 0 20 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 29.1225L7.63833 16.5L20 3.8775L16.1943 0L0 16.5L16.1943 33L20 29.1225Z" fill="#999999"/>
-          </svg>
+          <ChevronLeftIcon size={24} color="#999" />
         </button>
       </header>
 

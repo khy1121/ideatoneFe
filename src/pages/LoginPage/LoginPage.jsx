@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../constants/routes'
+import { ChevronLeftIcon } from '../../assets/icons'
 import './LoginPage.scss'
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -21,7 +22,6 @@ export default function LoginPage() {
   const canSubmit = emailValid && passwordValid
 
   const handleLogin = () => {
-    if (!canSubmit) return
     navigate(ROUTES.HOME)
   }
 
@@ -29,9 +29,7 @@ export default function LoginPage() {
     <div className="auth-page">
       <header className="auth-header">
         <button className="auth-header__back" onClick={() => navigate(-1)} aria-label="뒤로가기">
-          <svg width="12" height="20" viewBox="0 0 20 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 29.1225L7.63833 16.5L20 3.8775L16.1943 0L0 16.5L16.1943 33L20 29.1225Z" fill="#999999"/>
-          </svg>
+          <ChevronLeftIcon size={24} color="#999" />
         </button>
         <span className="auth-header__title">시작하기</span>
       </header>
@@ -69,8 +67,7 @@ export default function LoginPage() {
         </div>
 
         <button
-          className={`auth-btn auth-btn--pill${canSubmit ? ' auth-btn--active' : ''}`}
-          disabled={!canSubmit}
+          className="auth-btn auth-btn--pill auth-btn--active"
           onClick={handleLogin}
         >
           이메일로 로그인하기
