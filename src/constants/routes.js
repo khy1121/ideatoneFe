@@ -1,6 +1,8 @@
 export const ROUTES = {
   MAIN: '/',
   HOME: '/home',
+  CHARACTER: '/character',
+  CHARACTER_ERROR: '/character/error',
   ANALYZE: '/analyze',
   RESULT: '/result',
   MYPAGE: '/mypage',
@@ -9,4 +11,6 @@ export const ROUTES = {
   NICKNAME: '/signup/nickname',
   BOOK_DETAIL: '/book/:id',
   MEMO_EDIT: '/memo-edit',
+  CHAT: '/chat',
+  SEARCH: '/search',
 }

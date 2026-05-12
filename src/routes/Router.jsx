@@ -7,9 +7,13 @@ import NicknamePage from '../pages/NicknamePage/NicknamePage'
 import LibraryPage from '../pages/LibraryPage/LibraryPage'
 import BookDetailPage from '../pages/BookDetailPage/BookDetailPage'
 import MemoEditPage from '../pages/MemoEditPage/MemoEditPage'
+import CharacterPage from '../pages/CharacterPage/CharacterPage'
+import CharacterErrorPage from '../pages/CharacterPage/CharacterErrorPage'
 import AnalyzePage from '../pages/AnalyzePage/AnalyzePage'
 import ResultPage from '../pages/ResultPage/ResultPage'
 import MyPage from '../pages/MyPage/MyPage'
+import ChatPage from '../pages/ChatPage/ChatPage'
+import SearchPage from '../pages/SearchPage/SearchPage'
 import { ROUTES } from '../constants/routes'
 
 export default function Router() {
@@ -18,6 +22,8 @@ export default function Router() {
       <Routes>
         <Route path={ROUTES.MAIN} element={<SplashPage />} />
         <Route path={ROUTES.HOME} element={<LibraryPage />} />
+        <Route path={ROUTES.CHARACTER} element={<CharacterPage />} />
+        <Route path={ROUTES.CHARACTER_ERROR} element={<CharacterErrorPage />} />
         <Route path={ROUTES.LOGIN} element={<LoginPage />} />
         <Route path={ROUTES.SIGNUP} element={<SignupPage />} />
         <Route path={ROUTES.NICKNAME} element={<NicknamePage />} />
@@ -25,7 +31,9 @@ export default function Router() {
         <Route path={ROUTES.MEMO_EDIT} element={<MemoEditPage />} />
         <Route path={ROUTES.ANALYZE} element={<AnalyzePage />} />
         <Route path={ROUTES.RESULT} element={<ResultPage />} />
+        <Route path={ROUTES.CHAT} element={<ChatPage />} />
         <Route path={ROUTES.MYPAGE} element={<MyPage />} />
+        <Route path={ROUTES.SEARCH} element={<SearchPage />} />
       </Routes>
     </BrowserRouter>
   )
