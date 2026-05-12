@@ -1,8 +1,56 @@
-﻿/* Loading styles */
-@use '../../../styles/variables' as *;
+.fe-loading {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
 
-.fe-loading { display:flex; align-items:center; gap:0.75rem; color:$color-sub-text }
-.fe-loading__spinner { width:18px; height:18px; border:3px solid $color-border; border-top-color:$color-primary; border-radius:50%; animation:spin 1s linear infinite }
-.fe-loading__text { font-size:0.95rem }
+  &__spinner {
+    position: relative;
+    flex-shrink: 0;
+    border-radius: 50%;
+    // Figma GRADIENT_ANGULAR: pos=0(0°)~pos=0.176(63.4°) solid #FFB701 → pos=1.0 transparent
+    // 0° = 솔리드 캡 시작(반시계), 63.4° = 솔리드 캡 끝(dot 위치), 360° = 완전 투명
+    background: conic-gradient(
+      #ffb701 0deg,
+      #ffb701 63.4deg,
+      rgba(255, 255, 255, 0) 360deg
+    );
+    animation: fe-loading-spin 1.5s linear infinite;
+  }
 
-@keyframes spin { to { transform: rotate(360deg) } }
+  // 링 모양을 위한 안쪽 구멍
+  // Figma 기준: orbit_radius=67.6px, dot_radius=15.4px, inner_edge=52.2px → inset=17%
+  &__inner {
+    position: absolute;
+    inset: 17%;
+    border-radius: 50%;
+  }
+
+  // 솔리드 캡의 끝(63.4°, 약 2시 방향)에 위치 — 항상 arc의 선두에 위치
+  // sin(63.4°)=0.894, cos(63.4°)=0.448 → center=(79.5+67.5×0.894, 79.5−67.5×0.448)=(139.9,49.3)
+  // 159px 기준 %: left=88%, top=31%
+  &__dot {
+    position: absolute;
+    width: 19%;
+    height: 19%;
+    top: 31%;
+    left: 88%;
+    transform: translate(-50%, -50%);
+    background: #ffb701;
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  &__text {
+    margin: 0;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 14px;
+    color: #666661;
+    text-align: center;
+  }
+}
+
+@keyframes fe-loading-spin {
+  to { transform: rotate(360deg); }
+}

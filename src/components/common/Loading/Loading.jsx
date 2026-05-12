@@ -1,11 +1,15 @@
 import React from 'react'
 import './Loading.scss'
 
-export default function Loading({ message = 'AI가 내용을 분석하고 있어요.' }) {
+export default function Loading({ size = 64, bg = '#ffffff', message }) {
   return (
-    <div className="fe-loading" role="status">
-      <div className="fe-loading__spinner" />
-      <div className="fe-loading__text">{message}</div>
+    <div className="fe-loading" role="status" aria-label={message || '로딩 중'}>
+      <div className="fe-loading__spinner" style={{ width: size, height: size }}>
+        <div className="fe-loading__inner" style={{ background: bg }} />
+        <div className="fe-loading__dot" />
+      </div>
+      {message && <p className="fe-loading__text">{message}</p>}
     </div>
   )
 }
+           
