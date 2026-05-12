@@ -1,47 +1,177 @@
-/*
- AnalyzePage (임시)
- - 텍스트 입력 및 분석 요청 UI의 최소 템플릿입니다.
-*/
-import React, { useState } from 'react'
-import Layout from '../../components/layout/Layout/Layout'
-import Textarea from '../../components/common/Textarea/Textarea'
-import Button from '../../components/common/Button/Button'
-import Loading from '../../components/common/Loading/Loading'
-import { mockAnalyzeResult } from '../../data/mockData'
+import React, { useMemo, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { ROUTES } from '../../constants/routes'
 import './AnalyzePage.scss'
 
-export default function AnalyzePage() {
-  const [text, setText] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [result, setResult] = useState(null)
+const TODAY = '2026.05.11'
 
-  const handleAnalyze = async () => {
-    setLoading(true)
-    // 실제 API 호출 대신 mock 사용 (백엔드 준비 전)
-    setTimeout(() => {
-      setResult(mockAnalyzeResult)
-      setLoading(false)
-    }, 900)
+const QUESTIONS = [
+  ['오늘 하루 있었던', '일기를 간단하게 적어주세요.'],
+  ['현재 어떤 기분 상태와', '가장 가까우신가요?'],
+  ['오늘은 어떤 위로를', '받고 싶으신가요?'],
+]
+
+const EMOTION_GROUPS = [
+  ['신나는', '뿌듯한', '행복한', '차분한'],
+  ['슬픈', '스트레스', '공허한'],
+  ['피곤한', '우울', '화난'],
+]
+
+const COMFORT_OPTIONS = ['위로와 공감', '현실적 조언']
+
+export default function AnalyzePage() {
+  const navigate = useNavigate()
+  const textareaRef = useRef(null)
+  const [step, setStep] = useState(1)
+  const [diary, setDiary] = useState('')
+  const [emotions, setEmotions] = useState([])
+  const [comfort, setComfort] = useState('')
+  const [isDiaryFocused, setIsDiaryFocused] = useState(false)
+  const [showConfirm, setShowConfirm] = useState(false)
+
+  const canNext = useMemo(() => {
+    if (step === 1) return diary.trim().length > 0
+    if (step === 2) return emotions.length > 0
+    return Boolean(comfort)
+  }, [comfort, diary, emotions.length, step])
+
+  const handleBack = () => {
+    if (step === 1) {
+      setShowConfirm(true)
+      return
+    }
+
+    setStep(current => current - 1)
+  }
+
+  const handleNext = () => {
+    if (!canNext) return
+
+    if (step < 3) {
+      setStep(current => current + 1)
+      return
+    }
+
+    navigate(ROUTES.RESULT, {
+      state: { prompt: diary, emotions, comfort, loading: true },
+    })
+  }
+
+  const toggleEmotion = (emotion) => {
+    setEmotions(current => {
+      if (current.includes(emotion)) return current.filter(item => item !== emotion)
+      if (current.length >= 3) return current
+      return [...current, emotion]
+    })
   }
 
   return (
-    <Layout>
-      <section className="analyze-page">
-        <h2>분석할 텍스트 입력</h2>
-        <Textarea value={text} onChange={(e) => setText(e.target.value)} placeholder="공고문 내용을 붙여넣으세요." />
-        <div className="analyze-page__actions">
-          <Button variant="primary" onClick={handleAnalyze}>분석하기</Button>
-        </div>
+    <div className="analyze">
+      <button className="analyze__back" type="button" onClick={handleBack}>
+        ← 뒤로
+      </button>
 
-        {loading && <Loading />}
+      <div className="analyze__progress" aria-label={`${step} / 3 단계`}>
+        <span className={`analyze__progress-fill analyze__progress-fill--step-${step}`} />
+      </div>
 
-        {result && (
-          <div className="analyze-page__result">
-            <h3>미리보기 결과</h3>
-            <pre>{JSON.stringify(result, null, 2)}</pre>
+      <main className="analyze__body">
+        <p className="analyze__date">{TODAY}</p>
+
+        <h1 className="analyze__question">
+          {QUESTIONS[step - 1].map(line => (
+            <span key={line}>{line}</span>
+          ))}
+        </h1>
+
+        {step === 1 && (
+          <>
+            <p className="analyze__hint">최대 300자까지 적을 수 있어요.</p>
+            <div className={`analyze__diary${isDiaryFocused || diary ? ' analyze__diary--active' : ''}`}>
+              <textarea
+                ref={textareaRef}
+                value={diary}
+                maxLength={300}
+                onChange={event => setDiary(event.target.value)}
+                onFocus={() => setIsDiaryFocused(true)}
+                onBlur={() => setIsDiaryFocused(false)}
+                placeholder="일기쓰기"
+              />
+            </div>
+            {(isDiaryFocused || diary) && <p className="analyze__counter">({diary.length}/300)</p>}
+          </>
+        )}
+
+        {step === 2 && (
+          <>
+            <p className="analyze__hint">최대 3가지 선택할 수 있어요.</p>
+            <div className="analyze__emotions">
+              {EMOTION_GROUPS.map(group => (
+                <div key={group.join('-')} className="analyze__emotion-row">
+                  {group.map(emotion => {
+                    const active = emotions.includes(emotion)
+                    return (
+                      <button
+                        key={emotion}
+                        type="button"
+                        className={`analyze__chip${active ? ' analyze__chip--active' : ''}`}
+                        disabled={!active && emotions.length >= 3}
+                        onClick={() => toggleEmotion(emotion)}
+                      >
+                        {emotion}
+                      </button>
+                    )
+                  })}
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        {step === 3 && (
+          <div className="analyze__comforts">
+            {COMFORT_OPTIONS.map(option => (
+              <button
+                key={option}
+                type="button"
+                className={`analyze__comfort${comfort === option ? ' analyze__comfort--active' : ''}`}
+                onClick={() => setComfort(option)}
+              >
+                {option}
+              </button>
+            ))}
           </div>
         )}
-      </section>
-    </Layout>
+      </main>
+
+      <button
+        className={`analyze__next${canNext ? ' analyze__next--active' : ''}`}
+        type="button"
+        disabled={!canNext}
+        onClick={handleNext}
+      >
+        다음 단계로
+      </button>
+
+      {showConfirm && (
+        <div className="analyze__overlay" role="dialog" aria-modal="true">
+          <div className="analyze__dialog">
+            <p>
+              뒤로 나가시면 작성하신 내용은{'\n'}
+              복원되지 않습니다.{'\n'}
+              정말로 나가시겠습니까?
+            </p>
+            <div className="analyze__dialog-actions">
+              <button type="button" onClick={() => navigate(ROUTES.CHARACTER)}>
+                네, 나갈래요
+              </button>
+              <button type="button" onClick={() => setShowConfirm(false)}>
+                아니요, 계속 쓸래요
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   )
 }
