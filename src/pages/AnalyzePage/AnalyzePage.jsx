@@ -87,7 +87,13 @@ export default function AnalyzePage() {
         {step === 1 && (
           <>
             <p className="analyze__hint">최대 300자까지 적을 수 있어요.</p>
-            <div className={`analyze__diary${isDiaryFocused || diary ? ' analyze__diary--active' : ''}`}>
+            <div
+              className={[
+                'analyze__diary',
+                isDiaryFocused && 'analyze__diary--focused',
+                diary && 'analyze__diary--filled',
+              ].filter(Boolean).join(' ')}
+            >
               <textarea
                 ref={textareaRef}
                 value={diary}
@@ -95,7 +101,7 @@ export default function AnalyzePage() {
                 onChange={event => setDiary(event.target.value)}
                 onFocus={() => setIsDiaryFocused(true)}
                 onBlur={() => setIsDiaryFocused(false)}
-                placeholder="일기쓰기"
+                placeholder="일기를 입력해주세요."
               />
             </div>
             {(isDiaryFocused || diary) && <p className="analyze__counter">({diary.length}/300)</p>}

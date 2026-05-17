@@ -9,7 +9,7 @@ const SMALL_CHAR_IMG = 'https://www.figma.com/api/mcp/asset/f377f644-6363-410c-a
 const SHARE_ICON = 'https://www.figma.com/api/mcp/asset/48ba898f-19e1-46ca-907a-08bf1b5d4ed5'
 
 const LOADING_QUOTES = [
-  '중요한 것은 눈에 보이지 않아. 마음으로 보아야 해.',
+  '모든 게 낯설게 느껴지는 오늘, 앨리스도 처음엔\n아무것도 이해하지 못한 채 그 세계에 뛰어들었어요.',
   '오늘의 감정도 천천히 읽어보면 분명한 모양이 있어요.',
   '마음이 복잡한 날일수록 한 문장씩 정리해도 괜찮아요.',
 ]
@@ -30,6 +30,14 @@ const toResultChip = (emotion) => {
   }
 
   return map[emotion] ?? emotion
+}
+
+const getCurrentDate = () => {
+  const today = new Date()
+  const year = today.getFullYear()
+  const month = String(today.getMonth() + 1).padStart(2, '0')
+  const date = String(today.getDate()).padStart(2, '0')
+  return `${year}.${month}.${date}`
 }
 
 export default function ResultPage() {
@@ -65,17 +73,32 @@ export default function ResultPage() {
   if (loading) {
     return (
       <div className="result-loading">
-        <div className="result-loading__copy">
-          <h1>오늘의 당신을<br />정독하고 있어요.......</h1>
-          <p>부기님의 상태를 체크 중이에요</p>
+        <div className="result-loading__header">
+          <button
+            className="result-loading__back-btn"
+            type="button"
+            onClick={() => navigate(ROUTES.CHARACTER)}
+          >
+            ← 뒤로
+          </button>
         </div>
 
-        <div className="result-loading__spinner">
-          <Loading size={159} />
+        <div className="result-loading__date">{getCurrentDate()}</div>
+
+        <div className="result-loading__copy">
+          <h1 className="result-loading__title">
+            오늘의 당신을<br />정독하고 있어요.......
+          </h1>
+          <p className="result-loading__subtitle">부기님의 상태를 체크 중이에요</p>
+        </div>
+
+        <div className="result-loading__spinner-wrapper">
+          <div className="result-loading__spinner">
+            <Loading size={159} />
+          </div>
         </div>
 
         <p className="result-loading__quote">{LOADING_QUOTES[quoteIndex]}</p>
-
         <p className="result-loading__notice">최대 2분까지 소요될 수 있어요</p>
       </div>
     )

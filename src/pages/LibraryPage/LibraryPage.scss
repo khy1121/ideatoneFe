@@ -3,10 +3,11 @@
   width: 393px;
   height: 852px;
   margin: 0 auto;
+  box-sizing: border-box;
   background: #fff;
   display: flex;
   flex-direction: column;
-  padding-bottom: 64px;
+  padding-bottom: 68px;
   overflow: hidden;
 
   &__header {

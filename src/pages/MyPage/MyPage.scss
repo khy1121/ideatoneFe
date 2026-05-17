@@ -74,7 +74,7 @@
       top: 136px;
       left: 0;
       right: 0;
-      bottom: 80px;
+      bottom: calc(var(--safe-bottom, 30px) + 68px);
       overflow-y: auto;
       padding: 8px 36px 16px;
     }

@@ -19,7 +19,7 @@ const NAV_ITEMS = [
   { id: 'mypage',    label: '마이',      path: ROUTES.MYPAGE,    Icon: NavUserIcon },
 ]
 
-export default function BottomNav({ active = 'library' }) {
+export default function BottomNav({ active = 'library', className = '' }) {
   const navigate = useNavigate()
 
   const handleNavigate = (item) => {
@@ -31,7 +31,7 @@ export default function BottomNav({ active = 'library' }) {
   }
 
   return (
-    <nav className="bottom-nav" aria-label="하단 내비게이션">
+    <nav className={`bottom-nav${className ? ` ${className}` : ''}`} aria-label="하단 내비게이션">
       {NAV_ITEMS.map(item => {
         const isActive = active === item.id
         const { Icon } = item

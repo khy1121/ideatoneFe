@@ -5,7 +5,13 @@
 */
 import React from 'react'
 import Router from './routes/Router'
+import StatusBar from './components/common/StatusBar/StatusBar'
 
 export default function App() {
-  return <Router />
+  return (
+    <div className="app-frame">
+      <StatusBar />
+      <Router />
+    </div>
+  )
 }

@@ -9,41 +9,86 @@
   box-sizing: border-box;
 }
 
+
 .result-loading {
   position: relative;
   width: 393px;
   height: 852px;
+  margin: 0 auto;
+  background: #fefefe;
+  font-family: 'Pretendard', sans-serif;
   overflow: hidden;
 
-  // 제목 — x=20, y=153
-  &__copy {
+  &__header {
     position: absolute;
-    top: 153px;
+    top: 60px;
     left: 20px;
-    width: 222px;
+    z-index: 10;
+  }
 
-    h1 {
-      margin: 0 0 12px;
-      color: #161615;
-      font-size: 28px;
-      font-weight: 700;
-      line-height: 36px;
-    }
+  &__back-btn {
+    padding: 10px 0;
+    border: none;
+    background: transparent;
+    color: #42403a;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    font-family: 'Pretendard', sans-serif;
 
-    p {
-      margin: 0;
-      color: #777777;
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 22.4px;
+    &:active {
+      opacity: 0.7;
     }
   }
 
-  // 로딩 스피너 — x=117, y=361, 159×159
-  &__spinner {
+  &__date {
     position: absolute;
-    top: 361px;
-    left: 117px;
+    top: 157px;
+    left: 20px;
+    color: #f8bc0a;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 160%;
+    letter-spacing: -0.025em;
+  }
+
+  &__copy {
+    position: absolute;
+    top: 190px;
+    left: 20px;
+    width: 310px;
+  }
+
+  &__title {
+    margin: 0 0 12px 0;
+    color: #282723;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: -0.025em;
+  }
+
+  &__subtitle {
+    margin: 0;
+    color: #777;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 140%;
+    letter-spacing: -0.025em;
+  }
+
+  &__spinner-wrapper {
+    position: absolute;
+    top: 296px;
+    left: 0;
+    right: 0;
+    height: 328px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__spinner {
     width: 159px;
     height: 159px;
     display: flex;
@@ -51,33 +96,36 @@
     justify-content: center;
   }
 
-  // 인용구 — x=42, y=624, w=308
   &__quote {
     position: absolute;
     top: 624px;
     left: 42px;
     width: 308px;
     margin: 0;
-    color: #777777;
+    color: #777;
     font-size: 16px;
     font-weight: 400;
-    line-height: 24px;
+    line-height: 160%;
     text-align: center;
+    letter-spacing: -0.025em;
+    white-space: pre-line;
   }
 
-  // 안내 — x=115, y=697
   &__notice {
     position: absolute;
-    top: 697px;
-    left: 0;
-    width: 100%;
+    top: 690px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 190px;
     margin: 0;
     color: #afafaf;
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
     text-align: center;
+    letter-spacing: -0.025em;
   }
+
 }
 
 .result {

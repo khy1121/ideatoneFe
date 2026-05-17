@@ -8,63 +8,39 @@ export default function CharacterPage() {
   const navigate = useNavigate()
 
   return (
-    <div className="char-landing">
+    <main className="char-landing">
+      {/* 텍스트 */}
+      <section className="char-landing__text">
+        <h1 className="char-landing__title">오늘 하루는 어떤가요?</h1>
+        <p className="char-landing__subtitle">
+          오늘 감정을 들려주면<br />
+          어울리는 캐릭터를 찾아드릴게요
+        </p>
+      </section>
 
-      {/* === 배경 글로우 / 장식 === */}
-      <div className="char-landing__bg-glow-orange" aria-hidden="true" />
+      {/* 캐릭터 + 파동 원형 (한 묶음으로) */}
+      <div className="char-landing__stage" aria-hidden="true">
+        <span className="char-landing__ripple char-landing__ripple--1" />
+        <span className="char-landing__ripple char-landing__ripple--2" />
+        <span className="char-landing__ripple char-landing__ripple--3" />
 
-      {/* 동심원 링 (바깥 → 안쪽) */}
-      <div className="char-landing__ring char-landing__ring--outer" aria-hidden="true" />
-      <div className="char-landing__ring char-landing__ring--mid"   aria-hidden="true" />
-      <div className="char-landing__ring char-landing__ring--inner" aria-hidden="true" />
+        <img
+          className="char-landing__character"
+          src="/assets/character/character.svg"
+          alt=""
+        />
+      </div>
 
-      {/* 캐릭터 중심 오렌지 글로우 */}
-      <div className="char-landing__glow-center" aria-hidden="true" />
-
-      {/* 캐릭터 이미지 */}
-      <img
-        className="char-landing__char-img"
-        src="/assets/character/nadok-front.svg"
-        alt="가독이 캐릭터"
-      />
-
-      {/* 하단 오렌지 글로우 */}
-      <div className="char-landing__glow-bottom" aria-hidden="true" />
-
-      {/* 스파클 점들 */}
-      <img
-        className="char-landing__sparkles"
-        src="/assets/char-sparkles.svg"
-        aria-hidden="true"
-        alt=""
-      />
-
-      {/* 장식 노란 원들 */}
-      <div className="char-landing__dot char-landing__dot--lg-left"  aria-hidden="true" />
-      <div className="char-landing__dot char-landing__dot--sm-left"  aria-hidden="true" />
-      <div className="char-landing__dot char-landing__dot--xs-left"  aria-hidden="true" />
-      <div className="char-landing__dot char-landing__dot--lg-right" aria-hidden="true" />
-      <div className="char-landing__dot char-landing__dot--sm-right" aria-hidden="true" />
-      <div className="char-landing__dot char-landing__dot--xs-right" aria-hidden="true" />
-      <div className="char-landing__dot char-landing__dot--gold"     aria-hidden="true" />
-
-      {/* === 텍스트 === */}
-      <h1 className="char-landing__title">오늘 하루는 어땠어?</h1>
-      <p className="char-landing__subtitle">
-        네 감정을 알려주면<br />
-        우리는 캐릭터를 찾아드릴게요
-      </p>
-
-      {/* === CTA 버튼 === */}
+      {/* CTA */}
       <button
-        className="char-landing__btn"
+        className="char-landing__cta"
         type="button"
         onClick={() => navigate(ROUTES.ANALYZE)}
       >
         캐릭터 찾기
       </button>
 
-      <BottomNav active="character" />
-    </div>
+      <BottomNav active="character" className="bottom-nav--character-landing" />
+    </main>
   )
 }

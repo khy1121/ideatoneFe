@@ -1,0 +1,8 @@
+/* Minimal top status area (no icons/time) */
+.status-bar {
+  width: 100%;
+  height: var(--status-height, 60px);
+  background: #ffffff;
+  border-bottom: 1px solid #e6e6e4;
+  box-sizing: border-box;
+}

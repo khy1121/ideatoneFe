@@ -3,32 +3,70 @@
 * {
   box-sizing: border-box;
 }
-html, body, #root {
+
+html,
+body,
+#root {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
+  margin: 0;
 }
 
 html,
 body {
-  width: 100%;
-  height: 100%;
+  overflow-x: hidden;
+}
+
+:root {
+  --design-width: 393px;
+  --design-height: 852px;
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  --bottom-nav-height: 68px;
 }
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  background: $color-background;
+  min-height: 100dvh;
+  font-family: $font-family-base, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: #d9d9d9;
   color: $color-text;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 #root {
+  width: 100%;
+  min-height: 100dvh;
   display: flex;
   justify-content: center;
-  align-items: center;
+}
+
+/* 기존 app-frame을 app-shell처럼 사용 */
+.app-frame {
   width: 100%;
-  height: 100%;
+  max-width: var(--design-width);
+  min-height: 100dvh;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  background: $color-surface;
+}
+
+/* 모든 페이지 공통 */
+.mobile-page {
+  width: 100%;
+  min-height: 100dvh;
+  position: relative;
+  background: $color-surface;
+}
+
+/* 스크롤 필요한 페이지 */
+.mobile-page--scroll {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 하단 네비가 있는 페이지 */
+.mobile-page--with-bottom-nav {
+  padding-bottom: calc(var(--bottom-nav-height) + var(--safe-bottom));
 }

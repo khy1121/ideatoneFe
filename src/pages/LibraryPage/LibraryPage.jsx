@@ -9,6 +9,12 @@ import './LibraryPage.scss'
 const SAVED_KEY = 'savedBookIds'
 const SAVED_VER_KEY = 'savedBookIds_ver'
 const SAVED_VER = 'v2'
+const FRAME_HEIGHT = 852
+const STATUS_BAR_HEIGHT = 59
+const HEADER_HEIGHT = 78
+const BOTTOM_NAV_HEIGHT = 68
+const BOTTOM_SAFE_AREA = 34
+const CONTENT_BOTTOM_PADDING = 16
 const ROW_HEIGHT = 165
 
 function getSavedIds() {
@@ -24,7 +30,8 @@ function getSavedIds() {
 }
 
 function calcInitialRows() {
-  const contentHeight = window.innerHeight - 78 - 64 - 34
+  const contentHeight =
+    FRAME_HEIGHT - STATUS_BAR_HEIGHT - HEADER_HEIGHT - BOTTOM_NAV_HEIGHT - BOTTOM_SAFE_AREA - CONTENT_BOTTOM_PADDING
   return Math.max(Math.ceil(contentHeight / ROW_HEIGHT) + 1, 3)
 }
 
