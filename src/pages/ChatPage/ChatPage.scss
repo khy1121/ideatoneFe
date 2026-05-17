@@ -20,8 +20,9 @@
 // ── 채팅 목록 ──────────────────────────────────────────────
 .chat-list {
   position: relative;
-  width: 393px;
-  height: 852px;
+  width: 100%;
+  max-width: var(--design-width, 393px);
+  height: var(--app-frame-height);
   margin: 0 auto;
   overflow: hidden;
   background: #fff;
@@ -96,7 +97,7 @@
     top: 123px;
     left: 14px;
     right: 14px;
-    bottom: calc(var(--safe-bottom, 30px) + 68px);
+    bottom: var(--bottom-nav-offset);
     border-radius: 27px;
     background: #fceec3;
     overflow-y: auto;
@@ -146,8 +147,9 @@
 // ── 채팅 방 (처음접속 / 입력중 / 로딩중) ────────────────────
 .chat-room {
   position: relative;
-  width: 393px;
-  height: 852px;
+  width: 100%;
+  max-width: var(--design-width, 393px);
+  height: var(--app-frame-height);
   margin: 0 auto;
   overflow: hidden;
   background: #fff;
@@ -240,7 +242,7 @@
   &__quick-actions {
     position: absolute;
     left: 20px;
-    bottom: 122px;
+    bottom: calc(122px + var(--safe-bottom));
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -268,7 +270,7 @@
     top: 120px;
     left: 0;
     right: 0;
-    bottom: 110px;
+    bottom: calc(110px + var(--safe-bottom));
     padding: 20px 20px 0;
     overflow-y: auto;
     display: flex;
@@ -306,7 +308,7 @@
   &__input-wrap {
     position: absolute;
     left: 24px;
-    bottom: 42px;
+    bottom: calc(42px + var(--safe-bottom));
     width: 348px;
     min-height: 60px;
     display: flex;
@@ -367,25 +369,4 @@
     }
   }
 
-  &__home-bar {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    z-index: 10;
-    width: 393px;
-    height: 34px;
-    background: #fff;
-    overflow: hidden;
-  }
-
-  &__home-indicator {
-    position: absolute;
-    left: 130px;
-    top: 14px;
-    width: 134px;
-    height: 5px;
-    border-radius: 100px;
-    background: #000;
-  }
 }
-

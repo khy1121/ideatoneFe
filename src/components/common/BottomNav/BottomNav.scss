@@ -1,12 +1,13 @@
 .bottom-nav {
   position: absolute;
-  bottom: var(--safe-bottom, 30px);
+  bottom: var(--safe-bottom);
   left: 0;
   z-index: 100;
   display: flex;
   align-items: center;
-  width: 393px;
-  height: 68px;
+  width: 100%;
+  max-width: var(--design-width, 393px);
+  height: var(--bottom-nav-height, 68px);
   border-radius: 20px 20px 0 0;
   background: #fefefe;
   box-shadow: 0 0 8.1px rgba(40, 40, 40, 0.23);
@@ -65,9 +66,10 @@
   }
 
   &--character-landing {
-    bottom: calc(40px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(40px + var(--safe-bottom));
     left: 50%;
-    width: 393px;
+    width: 100%;
+    max-width: var(--design-width, 393px);
     height: 54px;
     border-radius: 0;
     background: transparent;

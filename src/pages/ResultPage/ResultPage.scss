@@ -1,8 +1,9 @@
 .result-loading,
 .result,
 .coin-page {
-  width: 393px;
-  height: 852px;
+  width: 100%;
+  max-width: var(--design-width, 393px);
+  height: var(--app-frame-height);
   margin: 0 auto;
   background: #fefefe;
   font-family: 'Pretendard', sans-serif;
@@ -12,8 +13,9 @@
 
 .result-loading {
   position: relative;
-  width: 393px;
-  height: 852px;
+  width: 100%;
+  max-width: var(--design-width, 393px);
+  height: var(--app-frame-height);
   margin: 0 auto;
   background: #fefefe;
   font-family: 'Pretendard', sans-serif;
@@ -130,7 +132,7 @@
 
 .result {
   position: relative;
-  height: 852px;
+  height: var(--app-frame-height);
   overflow: hidden;
 
   &__header {

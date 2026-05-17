@@ -20,15 +20,18 @@ body {
 :root {
   --design-width: 393px;
   --design-height: 852px;
+  --app-height: calc(var(--vh, 1vh) * 100);
+  --app-frame-height: min(var(--app-height), var(--design-height));
 
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 
   --bottom-nav-height: 68px;
+  --bottom-nav-offset: calc(var(--bottom-nav-height) + var(--safe-bottom));
 }
 
 body {
-  min-height: 100dvh;
+  min-height: var(--app-height);
   font-family: $font-family-base, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
   background: #d9d9d9;
   color: $color-text;
@@ -36,26 +39,24 @@ body {
 
 #root {
   width: 100%;
-  min-height: 100dvh;
+  min-height: var(--app-height);
   display: flex;
   justify-content: center;
 }
 
-/* 기존 app-frame을 app-shell처럼 사용 */
 .app-frame {
   width: 100%;
   max-width: var(--design-width);
-  min-height: 100dvh;
+  height: var(--app-frame-height);
   margin: 0 auto;
   position: relative;
   overflow: hidden;
   background: $color-surface;
 }
 
-/* 모든 페이지 공통 */
 .mobile-page {
   width: 100%;
-  min-height: 100dvh;
+  height: var(--app-frame-height);
   position: relative;
   background: $color-surface;
 }
@@ -68,5 +69,5 @@ body {
 
 /* 하단 네비가 있는 페이지 */
 .mobile-page--with-bottom-nav {
-  padding-bottom: calc(var(--bottom-nav-height) + var(--safe-bottom));
+  padding-bottom: var(--bottom-nav-offset);
 }

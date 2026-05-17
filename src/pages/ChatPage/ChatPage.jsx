@@ -206,10 +206,6 @@ function ChatRoom({ onBack }) {
           <ArrowUpIcon size={20} />
         </button>
       </div>
-
-      <div className="chat-room__home-bar" aria-hidden="true">
-        <div className="chat-room__home-indicator" />
-      </div>
     </div>
   )
 }

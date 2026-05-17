@@ -1,7 +1,8 @@
 .analyze {
   position: relative;
-  width: 393px;
-  height: 852px;
+  width: 100%;
+  max-width: var(--design-width, 393px);
+  height: var(--app-frame-height);
   margin: 0 auto;
   overflow: hidden;
   background: #fefefe;

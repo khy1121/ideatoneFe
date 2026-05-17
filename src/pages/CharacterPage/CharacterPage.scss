@@ -3,10 +3,8 @@
 .char-landing {
   position: relative;
   width: 100%;
-  max-width: 393px;
-  min-height: 852px;
-  height: 100dvh;
-  max-height: 852px;
+  max-width: var(--design-width, 393px);
+  height: var(--app-frame-height);
   overflow: hidden;
 
   background-color: v.$main-10;

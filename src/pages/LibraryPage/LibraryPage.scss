@@ -1,13 +1,14 @@
 .library {
   position: relative;
-  width: 393px;
-  height: 852px;
+  width: 100%;
+  max-width: var(--design-width, 393px);
+  height: var(--app-frame-height);
   margin: 0 auto;
   box-sizing: border-box;
   background: #fff;
   display: flex;
   flex-direction: column;
-  padding-bottom: 68px;
+  padding-bottom: var(--bottom-nav-offset);
   overflow: hidden;
 
   &__header {
@@ -48,6 +49,7 @@
     flex: 1;
     padding: 18px 44px 16px;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   &__row {
