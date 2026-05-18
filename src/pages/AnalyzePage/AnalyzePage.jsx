@@ -18,6 +18,8 @@ const EMOTION_GROUPS = [
 ]
 
 const COMFORT_OPTIONS = ['위로와 공감', '현실적 조언']
+const DIARY_MIN_HEIGHT = 56
+const DIARY_MAX_HEIGHT = 106
 
 export default function AnalyzePage() {
   const navigate = useNavigate()
@@ -27,6 +29,7 @@ export default function AnalyzePage() {
   const [emotions, setEmotions] = useState([])
   const [comfort, setComfort] = useState('')
   const [isDiaryFocused, setIsDiaryFocused] = useState(false)
+  const [diaryHeight, setDiaryHeight] = useState(DIARY_MIN_HEIGHT)
   const [showConfirm, setShowConfirm] = useState(false)
 
   const canNext = useMemo(() => {
@@ -54,6 +57,24 @@ export default function AnalyzePage() {
     navigate(ROUTES.RESULT, {
       state: { prompt: diary, emotions, comfort, loading: true },
     })
+  }
+
+  const resizeDiary = () => {
+    const textarea = textareaRef.current
+    if (!textarea) return
+
+    textarea.style.height = `${DIARY_MIN_HEIGHT}px`
+    const nextHeight = Math.min(
+      DIARY_MAX_HEIGHT,
+      Math.max(DIARY_MIN_HEIGHT, textarea.scrollHeight),
+    )
+    textarea.style.height = `${nextHeight}px`
+    setDiaryHeight(nextHeight)
+  }
+
+  const handleDiaryChange = (event) => {
+    setDiary(event.target.value)
+    requestAnimationFrame(resizeDiary)
   }
 
   const toggleEmotion = (emotion) => {
@@ -92,13 +113,17 @@ export default function AnalyzePage() {
                 isDiaryFocused && 'analyze__diary--focused',
                 diary && 'analyze__diary--filled',
               ].filter(Boolean).join(' ')}
+              style={{ '--diary-height': `${diaryHeight}px` }}
             >
               <textarea
                 ref={textareaRef}
                 value={diary}
                 maxLength={300}
-                onChange={event => setDiary(event.target.value)}
-                onFocus={() => setIsDiaryFocused(true)}
+                onChange={handleDiaryChange}
+                onFocus={() => {
+                  setIsDiaryFocused(true)
+                  requestAnimationFrame(resizeDiary)
+                }}
                 onBlur={() => setIsDiaryFocused(false)}
                 placeholder="일기를 입력해주세요."
               />
