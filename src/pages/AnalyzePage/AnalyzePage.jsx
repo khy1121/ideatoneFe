@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react'
+import React, { useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../constants/routes'
 import './AnalyzePage.scss'
@@ -38,8 +38,26 @@ export default function AnalyzePage() {
     return Boolean(comfort)
   }, [comfort, diary, emotions.length, step])
 
+  useLayoutEffect(() => {
+    const textarea = textareaRef.current
+    if (!textarea) return
+
+    if (!diary) {
+      setDiaryHeight(DIARY_MIN_HEIGHT)
+      return
+    }
+
+    textarea.style.height = 'auto'
+    const nextHeight = Math.min(
+      DIARY_MAX_HEIGHT,
+      Math.max(DIARY_MIN_HEIGHT, Math.ceil(textarea.scrollHeight)),
+    )
+    textarea.style.height = ''
+    setDiaryHeight(nextHeight)
+  }, [diary])
+
   const handleBack = () => {
-      setShowConfirm(true)
+    setShowConfirm(true)
   }
   const handlePrevious = () => {
     if (step === 1) return
@@ -59,22 +77,8 @@ export default function AnalyzePage() {
     })
   }
 
-  const resizeDiary = () => {
-    const textarea = textareaRef.current
-    if (!textarea) return
-
-    textarea.style.height = `${DIARY_MIN_HEIGHT}px`
-    const nextHeight = Math.min(
-      DIARY_MAX_HEIGHT,
-      Math.max(DIARY_MIN_HEIGHT, textarea.scrollHeight),
-    )
-    textarea.style.height = `${nextHeight}px`
-    setDiaryHeight(nextHeight)
-  }
-
   const handleDiaryChange = (event) => {
     setDiary(event.target.value)
-    requestAnimationFrame(resizeDiary)
   }
 
   const toggleEmotion = (emotion) => {
@@ -118,12 +122,10 @@ export default function AnalyzePage() {
               <textarea
                 ref={textareaRef}
                 value={diary}
+                rows={1}
                 maxLength={300}
                 onChange={handleDiaryChange}
-                onFocus={() => {
-                  setIsDiaryFocused(true)
-                  requestAnimationFrame(resizeDiary)
-                }}
+                onFocus={() => setIsDiaryFocused(true)}
                 onBlur={() => setIsDiaryFocused(false)}
                 placeholder="일기를 입력해주세요."
               />
